@@ -1,0 +1,242 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+}
+
+h1, h2, h3 {
+    font-family: 'Georgia', serif;
+    color: #2c3e50;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3498db;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Homepage Specific Styles */
+#hero {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #eaf2f8; /* A light, welcoming blue */
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#hero h2 {
+    color: #2c3e50; /* Darker blue from existing heading style */
+}
+
+#featured-memes {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.meme-gallery {
+    display: flex; /* Basic flexbox for horizontal layout */
+    justify-content: space-around; /* Distribute items evenly */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.meme-item {
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: calc(33.333% - 40px); /* Adjust for 3 items, considering margins/padding */
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.meme-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Add a light border to placeholder images */
+    min-height: 150px; /* Ensure placeholder has some height */
+    background-color: #eee; /* Background for placeholder */
+}
+
+.meme-item p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Basic styling for buttons */
+.btn {
+    display: inline-block;
+    background-color: #3498db; /* Blue from logo */
+    color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+#email-signup {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0; /* Slightly different background */
+    border-radius: 5px;
+}
+
+#email-signup input[type="email"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+/* Merchandise Page Specific Styles */
+#merch-items {
+    display: flex;
+    justify-content: space-around; /* Or space-between */
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between items */
+    padding: 20px 0;
+}
+
+.merch-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    width: calc(33.333% - 40px); /* Adjust for 3 items, considering margins/padding & gap */
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center; /* Center content within the item card */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for card effect */
+}
+
+.merch-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    min-height: 200px; /* Ensure placeholder has some height */
+    background-color: #eee; /* Background for placeholder */
+}
+
+.merch-item h3 {
+    font-size: 1.2em;
+    color: #333; /* Slightly darker than body text for emphasis */
+    margin-bottom: 10px;
+}
+
+.merch-item p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* About Page List Styling (Optional) */
+#what-we-do ul {
+    list-style-type: disc; /* Or square */
+    margin-left: 20px;
+    padding-left: 10px;
+}
+
+#what-we-do ul li {
+    margin-bottom: 8px;
+}
+
+/* Responsive Design Adjustments */
+
+/* Tablet View (e.g., screens up to 768px wide) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Slightly wider container for tablets */
+        padding: 15px;
+    }
+
+    .meme-gallery,
+    #merch-items {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items when stacked */
+    }
+
+    .meme-item,
+    .merch-item {
+        width: 80%; /* Allow items to take more width when stacked */
+        margin-bottom: 20px; /* Add space between stacked items */
+    }
+
+    nav ul li {
+        display: block; /* Stack navigation links */
+        margin-right: 0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    #email-signup input[type="email"] {
+        width: 70%; /* Adjust email input width */
+        margin-bottom:10px; /* Add space below email input before button */
+    }
+    #email-signup button[type="submit"]{
+        width: auto; /* Allow button to size to content or set specific width */
+    }
+}
+
+/* Mobile View (e.g., screens up to 480px wide) */
+@media (max-width: 480px) {
+    .container {
+        width: 95%; /* Even wider container for mobile */
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 1.5em; /* Smaller logo text for mobile */
+    }
+    
+    h1 { font-size: 1.8em; } /* Slightly smaller main page titles if any are h1 */
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+
+
+    .meme-item,
+    .merch-item {
+        width: 90%; /* Items take even more width */
+    }
+
+    #email-signup input[type="email"] {
+        width: 90%;
+    }
+}
