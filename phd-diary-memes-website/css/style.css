@@ -1,364 +1,556 @@
 :root {
-    --primary-bg: #FFFFFF;
-    --content-bg: #F8F9FA;
-    --primary-text: #212529;
-    --secondary-text: #6C757D;
-    --primary-accent: #007BFF;
-    --secondary-accent: #0056b3;
-    --light-grey-border: #DEE2E6; /* For subtle borders/dividers */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --phd-bg-primary: #F0F4F8;
+    --phd-bg-content: #FFFFFF;
+    --phd-text-primary: #2C3A47;
+    --phd-text-secondary: #57606F;
+    --phd-accent-primary: #FF6B6B;
+    --phd-accent-secondary: #FF8E8E;
+    --phd-highlight-bg: #FFF5E1;
+    --phd-border-color: #CED6E0;
+
+    --phd-font-heading: 'Arvo', serif;
+    --phd-font-body: 'Roboto', sans-serif;
 }
 
 body {
-    font-family: var(--font-body);
-    line-height: 1.7; /* Increased for better readability */
+    font-family: var(--phd-font-body);
+    font-weight: 400;
+    line-height: 1.75;
     margin: 0;
     padding: 0;
-    background-color: var(--primary-bg);
-    color: var(--primary-text);
-    font-size: 16px; /* Base font size */
+    background-color: var(--phd-bg-primary);
+    color: var(--phd-text-primary);
+    font-size: 17px;
 }
 
 .container {
-    width: 80%;
-    max-width: 1100px; /* Add a max-width for very large screens */
-    margin: 0 auto; /* Keep auto for horizontal centering */
-    padding: 30px 20px; /* Adjust padding */
-    background-color: var(--primary-bg); /* Assuming content backgrounds are handled by sections or cards */
+    width: 85%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: 700; /* Bold for headings */
-    color: var(--primary-text); /* Or a slightly darker shade if preferred */
-    margin-top: 1.5em; /* Adjust spacing */
-    margin-bottom: 0.8em;
-}
-h1 { font-size: 2.5em; } /* Example sizes, can be fine-tuned */
-h2 { font-size: 2em; }
-h3 { font-size: 1.75em; }
-
-p {
-    margin-bottom: 1.2em;
-    color: var(--secondary-text); /* Use secondary text for paragraphs by default for softer look */
-}
-/* Make paragraphs inside specific content sections (like hero or product descriptions) primary text if needed */
-section p, .container p { /* This makes most content text primary */
-   color: var(--primary-text);
+/* HEADER STYLES */
+header {
+    background-color: var(--phd-bg-content);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(44, 58, 71, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
 }
 
-a {
-    color: var(--primary-accent);
-    text-decoration: none; /* Remove underline by default */
-    transition: color 0.2s ease-in-out;
-}
-
-a:hover, a:focus {
-    color: var(--secondary-accent);
-    text-decoration: underline; /* Add underline on hover/focus */
+header .container {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-    font-size: 2em; /* Will be adjusted in media queries */
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--primary-accent); /* Use new accent color */
+    font-family: var(--phd-font-heading);
+    font-size: 1.8em;
+    color: var(--phd-accent-primary);
+    margin: 0;
+    text-decoration: none;
 }
 
 nav ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
 }
-
 nav ul li {
-    display: inline;
-    margin-right: 20px;
+    margin-left: 25px;
 }
 
 nav ul li a {
+    font-family: var(--phd-font-body);
+    font-weight: 700;
+    color: var(--phd-text-primary);
     text-decoration: none;
-    color: var(--primary-text); /* Use primary text color for nav links */
-    font-weight: 700; /* Make nav links bold */
+    padding-bottom: 8px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
-nav ul li a:hover, nav ul li a:focus {
-    color: var(--primary-accent); /* Use accent color for hover */
-    text-decoration: none; /* No underline for nav links */
-}
-
-
-/* Homepage Specific Styles */
-#hero {
-    text-align: center;
-    padding: 50px 20px; /* Further adjusted padding */
-    background-color: var(--content-bg); /* Use content background */
-    border-radius: 5px;
-    margin-bottom: 30px; /* Adjusted margin */
+nav ul li a:hover,
+nav ul li a:focus,
+nav ul li a.active {
+    color: var(--phd-accent-primary);
+    border-bottom-color: var(--phd-accent-primary);
 }
 
-/* h2 and p in hero will inherit global styles for font and color, no specific override needed unless design differs */
+/* GENERAL TYPOGRAPHY & ELEMENT STYLES */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--phd-font-heading);
+    font-weight: 700;
+    color: var(--phd-text-primary);
+    line-height: 1.3;
+    margin-top: 1.8em;
+    margin-bottom: 1em;
+}
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; } /* Default h2 size */
+h3 { font-size: 1.8em; } /* Default h3 size */
 
-#featured-memes {
-    text-align: center;
-    padding: 40px 0; /* Adjusted padding */
-    margin-bottom: 30px; /* Adjusted margin */
+p {
+    margin-bottom: 1.5em;
+    color: var(--phd-text-secondary);
 }
 
-.meme-gallery {
-    display: flex; /* Basic flexbox for horizontal layout */
-    justify-content: space-around; /* Distribute items evenly */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+section p, .container p, .container li {
+    color: var(--phd-text-primary);
 }
 
-.meme-item {
-    margin: 10px;
-    border: 1px solid var(--light-grey-border); /* Use new border color */
-    padding: 20px; /* Updated padding */
-    width: calc(33.333% - 40px); /* Adjust for 3 items, considering margins/padding if no gap */
-    box-sizing: border-box;
-    background-color: var(--primary-bg); /* Use primary background */
-    border-radius: 5px; /* Consistent radius */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* New box shadow */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* New transition */
+a {
+    color: var(--phd-accent-primary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-.meme-item:hover {
-    transform: translateY(-5px); /* New hover effect */
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
+a:hover, a:focus {
+    color: var(--phd-accent-secondary);
+    text-decoration: underline;
 }
 
-.meme-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px; /* Consistent radius */
-    border: 1px solid var(--light-grey-border); /* Use new border color */
-    min-height: 150px; /* Ensure placeholder has some height */
-    background-color: var(--content-bg); /* Use content background for placeholder bg */
-}
-
-.meme-item p {
-    font-size: 0.9em;
-    color: var(--secondary-text); /* Use secondary text */
-    font-family: var(--font-body); /* Explicitly ensure body font */
-}
-
-/* .btn styling is global, no need to repeat here */
 .btn {
     display: inline-block;
-    background-color: var(--primary-accent);
+    background-color: var(--phd-accent-primary);
     color: #ffffff;
-    padding: 12px 25px; /* Adjusted padding */
+    padding: 12px 28px;
     text-decoration: none;
-    border-radius: 5px; /* Softer radius */
-    font-weight: bold;
-    font-family: var(--font-heading); /* Use heading font for buttons */
-    border: none; /* Remove default border */
+    border-radius: 6px;
+    font-family: var(--phd-font-heading);
+    font-weight: 700;
+    border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn:hover, .btn:focus {
-    background-color: var(--secondary-accent);
-    color: #ffffff; /* Ensure text color remains white on hover */
-    text-decoration: none; /* Ensure no underline on button hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    background-color: var(--phd-accent-secondary);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 .btn:active {
-     transform: translateY(0); /* Reset lift on click */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* SECTION STYLING (HOMEPAGE, MERCH INTRO, ABOUT/CONTACT SECTIONS) */
+#hero {
+    background-color: var(--phd-highlight-bg);
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--phd-border-color);
+    margin-bottom: 40px;
+    border-radius: 0; /* Full width band, no radius */
+}
+#hero h2 {
+    font-size: 3em;
+    color: var(--phd-text-primary);
+    margin-bottom: 0.7em;
+}
+#hero p {
+    font-size: 1.15em;
+    color: var(--phd-text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+}
+.hero-highlight {
+    color: var(--phd-accent-primary);
+}
+
+#featured-memes {
+    background-color: var(--phd-bg-content);
+    padding: 60px 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    border-radius: 8px; /* Rounded corners for this content block */
+    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.07);
+}
+#featured-memes h3 {
+    font-size: 2.2em;
+    color: var(--phd-text-primary);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.meme-gallery {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.meme-item {
+    background-color: var(--phd-bg-content);
+    border: 1px solid var(--phd-border-color);
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    width: calc((100% - 2 * 20px) / 3); /* 3 columns with 20px gap */
+    box-sizing: border-box;
+}
+.meme-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(44, 58, 71, 0.12);
+    border-color: var(--phd-accent-primary);
+}
+.meme-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--phd-border-color);
+    min-height: 150px;
+    background-color: var(--phd-bg-primary);
+}
+.meme-item p {
+    font-family: var(--phd-font-body);
+    color: var(--phd-text-secondary);
+    font-size: 0.9em;
+    margin-top: 15px;
+    line-height: 1.5;
 }
 
 #email-signup {
+    background-color: var(--phd-highlight-bg);
+    padding: 50px 20px;
+    border-top: 2px solid var(--phd-accent-primary);
+    border-bottom: 2px solid var(--phd-accent-primary);
     text-align: center;
-    padding: 40px 20px; /* Adjusted padding */
-    background-color: var(--content-bg); /* Use content background */
-    border-radius: 5px;
-    margin-top: 30px; /* Added margin for separation */
+    margin-top: 40px;
+    margin-bottom: 40px; /* Added for spacing from footer */
+    border-radius: 0; /* Full-width band */
 }
-#email-signup h3 { /* Ensure heading font is applied if not already */
-    font-family: var(--font-heading);
+#email-signup h3 {
+    font-size: 2em;
+    color: var(--phd-text-primary);
+    margin-bottom: 15px;
 }
-#email-signup p { /* Ensure body font is applied if not already */
-    font-family: var(--font-body);
-    color: var(--primary-text); /* Or secondary if preferred for this specific p */
+#email-signup p {
+    font-size: 1.1em;
+    color: var(--phd-text-secondary);
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    line-height: 1.7;
 }
-
-#email-signup input[type="email"] {
-    padding: 12px 15px; /* Adjusted padding */
-    margin-right: 10px;
-    border: 1px solid var(--light-grey-border); /* Use new border color */
-    border-radius: 5px; /* Consistent radius */
-    width: 250px; /* Keep or adjust based on design */
-    font-family: var(--font-body); /* Ensure body font */
-    font-size: 1em; /* Consistent font size */
-}
-
-form#signup-form { /* Add spacing for the form itself */
+form#signup-form {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-top: 20px;
 }
-
-
-/* Merchandise Page Specific Styles */
-#merch-items {
-    display: flex;
-    justify-content: space-around; /* Or space-between */
-    flex-wrap: wrap;
-    gap: 20px; /* Adds space between items */
-    padding: 40px 0; /* Adjusted padding */
-}
-
-.merch-item {
-    border: 1px solid var(--light-grey-border);
-    padding: 20px; /* Updated padding */
-    width: calc(33.333% - 40px); /* Adjust for 3 items, considering margins/padding & gap if not using flex gap directly on parent for this calc */
+#email-signup input[type="email"] {
+    background-color: var(--phd-bg-content);
+    border: 1px solid var(--phd-border-color);
+    border-radius: 6px;
+    padding: 12px 15px;
+    font-family: var(--phd-font-body);
+    font-size: 1em;
+    min-width: 280px;
+    flex-grow: 1;
     box-sizing: border-box;
-    background-color: var(--content-bg); /* Changed background to content-bg */
-    border-radius: 5px; /* Consistent radius */
-    text-align: center; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* New box shadow */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* New transition */
+    color: var(--phd-text-primary);
+}
+#email-signup input[type="email"]::placeholder {
+    color: var(--phd-text-secondary);
+    opacity: 0.8;
+}
+#email-signup .btn {
+   flex-shrink: 0;
 }
 
+/* MERCH PAGE INTRO & PRODUCT STYLING */
+main.container > h2.page-title { /* Specific class for main page titles if needed */
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 2.5em;
+    color: var(--phd-text-primary);
+}
+main.container > p.page-intro { /* Specific class for intro paragraphs */
+    text-align: center;
+    color: var(--phd-text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    line-height: 1.7;
+}
+
+#merch-items {
+   padding: 20px 0;
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+   gap: 20px;
+}
+.merch-item {
+    background-color: var(--phd-bg-content);
+    border: 1px solid var(--phd-border-color);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    width: calc((100% - 2 * 20px) / 3); /* 3 columns with 20px gap */
+    box-sizing: border-box;
+    text-align: center;
+}
 .merch-item:hover {
-    transform: translateY(-5px); /* New hover effect */
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(44, 58, 71, 0.12);
+    border-color: var(--phd-accent-primary);
 }
-
 .merch-item img {
     max-width: 100%;
     height: auto;
-    border-radius: 5px; /* Consistent radius */
-    border: 1px solid var(--light-grey-border); 
-    margin-bottom: 10px;
-    min-height: 200px; 
-    background-color: #eee; /* Fallback or specific placeholder bg */
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background-color: #eee; /* Placeholder bg */
+    min-height: 200px;
 }
-
 .merch-item h3 {
-    font-family: var(--font-heading); /* Ensure heading font */
-    font-size: 1.4em; /* Adjusted font size */
-    color: var(--primary-text); 
-    margin-bottom: 10px; 
-}
-
-.merch-item p {
-    font-family: var(--font-body); /* Ensure body font */
-    font-size: 0.9em;
-    color: var(--secondary-text); 
-    margin-bottom: 15px;
-}
-
-/* About Page List Styling (Optional) */
-#what-we-do ul {
-    list-style-type: disc; /* Or square */
-    margin-left: 20px;
-    padding-left: 10px;
-}
-
-#what-we-do ul li {
-    margin-bottom: 8px;
-    color: var(--primary-text); /* Ensure list items use primary text color */
-}
-#what-we-do ul li::marker {
-    color: var(--primary-accent); /* Style list markers */
-}
-
-#what-we-do ul li { /* Increased margin for list items */
+    font-family: var(--phd-font-heading);
+    color: var(--phd-text-primary);
+    font-size: 1.6em;
     margin-bottom: 10px;
+    line-height: 1.3;
+}
+.merch-item p {
+    font-family: var(--phd-font-body);
+    color: var(--phd-text-secondary);
+    font-size: 0.95em;
+    line-height: 1.65;
+    margin-bottom: 20px;
 }
 
-
-/* About & Contact Page Section Styling */
-/* Apply to all sections within main on about.html and contact.html */
-.container > main section { /* More specific selector if main is not a direct child */
-    margin-bottom: 30px; /* Add bottom margin for separation */
-    padding-bottom: 10px; /* Optional padding if a border is added */
-    /* border-bottom: 1px solid var(--light-grey-border); */ /* Example border, use if desired */
+/* ABOUT & CONTACT PAGE STYLING */
+.about-content,
+.contact-content {
+    background-color: var(--phd-bg-content);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.07);
 }
-
-/* To prevent border on the last section if that approach is used: */
-.container > main section:last-child {
+.about-content:last-of-type,
+.contact-content:last-of-type {
     margin-bottom: 0;
-    padding-bottom: 0;
-    /* border-bottom: none; */
 }
 
+/* Titles for About/Contact pages (if using general h2) */
+main.container > h2 { /* Applies to Merch title too if not more specific */
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--phd-text-primary);
+}
+
+.about-content h3,
+.contact-content h3 {
+    font-size: 1.8em;
+    color: var(--phd-accent-primary);
+    margin-bottom: 20px;
+}
+
+#what-we-do ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+#what-we-do ul li {
+    font-size: 1.05em;
+    color: var(--phd-text-primary);
+    margin-bottom: 18px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.7;
+}
+#what-we-do ul li::before {
+    content: '✓';
+    color: var(--phd-accent-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.1em;
+}
+
+.contact-content .placeholder-note {
+    font-size: 0.85em;
+    color: var(--phd-text-secondary);
+    font-style: italic;
+    text-align: center;
+    margin-top: 5px;
+}
+#contact-info p a { /* Email link on contact page */
+   font-size: 1.1em;
+}
+
+/* FOOTER STYLES */
+footer {
+    background-color: var(--phd-text-primary);
+    color: var(--phd-bg-primary);
+    padding: 40px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+footer p {
+    color: var(--phd-bg-primary);
+    margin: 0;
+    font-size: 0.95em;
+}
+footer a {
+    color: var(--phd-accent-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+footer a:hover,
+footer a:focus {
+    color: var(--phd-accent-secondary);
+    text-decoration: underline;
+}
+
+/* UTILITIES (Scrollbar, Animations) */
 html {
     scroll-behavior: smooth;
 }
 
 .animated-section {
     opacity: 0;
-    transform: translateY(30px); /* Start slightly lower */
+    transform: translateY(30px);
     transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
-
 .animated-section.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--phd-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--phd-text-secondary);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--phd-text-primary);
+}
 
-/* Responsive Design Adjustments */
-
-/* Tablet View (e.g., screens up to 768px wide) */
-@media (max-width: 768px) {
-    .container {
-        width: 90%; /* Slightly wider container for tablets */
-        padding: 15px;
-    }
-
-    .meme-gallery,
-    #merch-items {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items when stacked */
-    }
-
-    .meme-item,
-    .merch-item {
-        width: 80%; /* Allow items to take more width when stacked */
-        margin-bottom: 20px; /* Add space between stacked items */
-    }
-
-    nav ul li {
-        display: block; /* Stack navigation links */
-        margin-right: 0;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    #email-signup input[type="email"] {
-        width: 70%; /* Adjust email input width */
-        margin-bottom:10px; /* Add space below email input before button */
-    }
-    #email-signup button[type="submit"]{
-        width: auto; /* Allow button to size to content or set specific width */
+/* RESPONSIVE DESIGN ADJUSTMENTS */
+@media (max-width: 992px) {
+    .meme-item, .merch-item {
+        width: calc((100% - 20px) / 2); /* 2 columns with 20px gap */
     }
 }
 
-/* Mobile View (e.g., screens up to 480px wide) */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    nav ul {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+    nav ul li {
+        margin-left: 0;
+        margin-bottom: 12px;
+    }
+    nav ul li:last-child {
+        margin-bottom: 0;
+    }
+
     .container {
-        width: 95%; /* Even wider container for mobile */
-        padding: 10px;
+        width: 90%;
+        padding: 20px 15px;
+    }
+
+    h1 { font-size: 2.4em; }
+    h2 { font-size: 2em; } /* Default h2 at this breakpoint */
+    h3 { font-size: 1.6em; } /* Default h3 at this breakpoint */
+    
+    #hero h2 { font-size: 2.5em; } /* Specific hero h2 adjustment */
+    main.container > h2 { font-size: 2.2em; } /* Page titles like on Merch/About/Contact */
+    .about-content h3, .contact-content h3, #email-signup h3, #featured-memes h3 { font-size: 1.7em; } /* Section titles */
+
+
+    .meme-gallery,
+    #merch-items {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .meme-item,
+    .merch-item {
+        width: 85%; /* Stacked items take more width */
+        margin-bottom: 25px; /* Use margin as gap doesn't apply to column flex */
+    }
+     .meme-item:last-child, .merch-item:last-child {
+        margin-bottom: 0;
+    }
+
+    #email-signup input[type="email"] {
+        width: calc(100% - 30px); /* Full width minus padding */
+        min-width: auto; /* Reset min-width */
+        margin-right: 0;
+        margin-bottom:15px;
+    }
+    #email-signup .btn { /* Ensure button stacks nicely */
+        width: auto; /* Or 100% for full width button */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+    .container {
+        width: 95%;
+        padding: 20px 10px;
     }
 
     .logo {
-        font-size: 1.5em; /* Smaller logo text for mobile */
+        font-size: 1.6em;
     }
     
-    h1 { font-size: 1.8em; } /* Slightly smaller main page titles if any are h1 */
-    h2 { font-size: 1.5em; }
-    h3 { font-size: 1.2em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; } /* Default h2 */
+    h3 { font-size: 1.4em; } /* Default h3 */
+
+    #hero h2 { font-size: 2em; } /* Specific hero h2 adjustment */
+    main.container > h2 { font-size: 1.8em; } /* Page titles */
+    .about-content h3, .contact-content h3, #email-signup h3, #featured-memes h3 { font-size: 1.5em; } /* Section titles */
 
 
     .meme-item,
     .merch-item {
-        width: 90%; /* Items take even more width */
+        width: 95%;
     }
+    .container > main section, #featured-memes { /* Reduce padding for content sections on smallest screens */
+        padding: 20px;
+    }
+    #hero { padding: 60px 15px; }
+    #email-signup { padding: 40px 15px; }
 
     #email-signup input[type="email"] {
-        width: 90%;
+        width: 100%; /* Full width */
+        box-sizing: border-box;
     }
 }
