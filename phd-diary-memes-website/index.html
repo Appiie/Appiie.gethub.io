@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Caveat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,44 +28,75 @@
     </header>
 
     <main class="container">
-        <section id="hero" class="animated-section">
-            <h2>Turning Academic <span class="hero-highlight">Pain</span> into Academic <span class="hero-highlight">Gain</span>!</h2>
-            <p>Welcome to PhD Diary Memes, your go-to source for academic humor, relatable PhD life content, and a community that gets it. We're here to share a laugh and make the journey a little brighter.</p>
+        <section id="hero"> <!-- Remove animated-section if hero itself is not revealed by scroll -->
+            <div class="hero-content"> <!-- New wrapper for content -->
+                <h2>
+                    <span class="h-word">Turning</span> 
+                    <span class="h-word">Academic</span> 
+                    <span class="hero-highlight h-word">Pain</span> 
+                    <span class="h-word">into</span> 
+                    <span class="h-word">Academic</span> 
+                    <span class="hero-highlight h-word">Gain</span>!
+                </h2>
+                <p class="hero-subtitle animated-section">Your daily dose of PhD humor, relatable content, and a community that gets the academic grind. Making the journey brighter, one meme at a time.</p>
+                <div class="hero-svg-placeholder animated-section">
+                    <!-- Placeholder for a future animated SVG icon --> <!-- TODO: Replace with animated SVG: e.g., flickering lightbulb, steaming brain, idea pop -->
+                </div>
+                <a href="#featured-memes" class="btn btn-hero-cta animated-section">Discover the Laughter</a>
+            </div>
         </section>
 
-        <section id="featured-memes" class="animated-section">
-            <h3>Fan Favorites</h3>
-            <div class="meme-gallery">
-                <div class="meme-item">
-                    <img src="images/meme1_placeholder.jpg" alt="Funny PhD Meme 1">
-                    <p>Caption for Meme 1</p>
-                </div>
-                <div class="meme-item">
-                    <img src="images/meme2_placeholder.jpg" alt="Funny PhD Meme 2">
-                    <p>Caption for Meme 2</p>
-                </div>
-                <div class="meme-item">
-                    <img src="images/meme3_placeholder.jpg" alt="Funny PhD Meme 3">
-                    <p>Caption for Meme 3</p>
+        <section id="featured-memes" class="animated-section"> <!-- Keep animated-section for overall section reveal -->
+            <h3>Fan Favorites &amp; Fresh Finds</h3> <!-- Example of a more revolutionary title -->
+            <div class="polaroid-scroll-container">
+                <div class="meme-gallery polaroid-style">
+                    <div class="meme-item">
+                        <img src="images/meme1_placeholder.jpg" alt="Funny PhD Meme 1">
+                        <p>My brain during thesis writing...</p>
+                    </div>
+                    <div class="meme-item">
+                        <img src="images/meme2_placeholder.jpg" alt="Funny PhD Meme 2">
+                        <p>Coffee: Fuel or Fallacy?</p>
+                    </div>
+                    <div class="meme-item">
+                        <img src="images/meme3_placeholder.jpg" alt="Funny PhD Meme 3">
+                        <p>That one reviewer's comments.</p>
+                    </div>
+                    <!-- Add 2-3 more placeholders for a good scroll effect -->
+                    <div class="meme-item">
+                        <img src="images/meme1_placeholder.jpg" alt="Funny PhD Meme 4">
+                        <p>Imposter syndrome is my co-author.</p>
+                    </div>
+                    <div class="meme-item">
+                        <img src="images/meme2_placeholder.jpg" alt="Funny PhD Meme 5">
+                        <p>Surviving on ramen &amp; hope.</p>
+                    </div>
                 </div>
             </div>
-            <p style="text-align:center; margin-top: 20px;">
-                <a href="https_instagram_com_phddiarymemes" target="_blank" class="btn">See More on Instagram</a>
+            <p style="text-align:center; margin-top: 40px;"> <!-- Increased margin -->
+                <a href="https_instagram_com_phddiarymemes" target="_blank" class="btn btn-secondary-custom">More on Instagram!</a> <!-- Possibly a secondary button style -->
             </p>
         </section>
 
         <section id="email-signup" class="animated-section">
-            <h3>Join Our Mailing List</h3>
-            <p>Get updates on new content, upcoming merch, and exclusive academic resources (and more memes, of course!).</p>
-            <form id="signup-form">
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn">Subscribe</button>
-            </form>
+            <div class="notecard">
+                <div class="paperclip"></div> <!-- Optional paperclip -->
+                <h3>Want More Academic LOLs?</h3> <!-- Example title -->
+                <p>Get our weekly dose of curated PhD memes, survival tips, and early access to new merch, straight to your inbox!</p>
+                <form id="signup-form">
+                    <input type="email" id="email" name="email" placeholder="Your primary research email..." required>
+                    <button type="submit" class="btn btn-notecard">Count Me In!</button>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
+            <div class="footer-badge-placeholder">
+                <span>PhD Diary Approved!</span>
+                <!-- TODO: Replace with a custom "Officially Funny" or "Academic Pain Tested" badge/stamp graphic -->
+            </div>
             <p>&copy; 2024 PhD Diary Memes. All Rights Reserved.</p>
         </div>
     </footer>

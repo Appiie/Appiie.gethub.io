@@ -10,9 +10,13 @@
 
     --phd-font-heading: 'Arvo', serif;
     --phd-font-body: 'Roboto', sans-serif;
+    --phd-font-handwritten: 'Caveat', cursive; 
 }
 
 body {
+    opacity: 0; /* Initially hidden to prevent FOUC with animation */
+    animation: fadeInPage 0.6s ease-out forwards;
+    animation-delay: 0.1s; /* Short delay */
     font-family: var(--phd-font-body);
     font-weight: 400;
     line-height: 1.75;
@@ -94,17 +98,25 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1em;
 }
 h1 { font-size: 2.8em; }
-h2 { font-size: 2.2em; } /* Default h2 size */
-h3 { font-size: 1.8em; } /* Default h3 size */
+h2 { font-size: 2.2em; } 
+h3 { font-size: 1.8em; } 
 
 p {
     margin-bottom: 1.5em;
     color: var(--phd-text-secondary);
 }
 
-section p, .container p, .container li {
+section p, .container p, .container li { /* This rule ensures p inside sections get primary text color */
     color: var(--phd-text-primary);
 }
+/* Paragraphs directly under .notecard or .merch-item should use their specific p styles if defined */
+.notecard p, .merch-item p, .meme-item p, #hero p.hero-subtitle {
+    color: var(--phd-text-secondary); /* Explicitly set these to secondary if that's the design */
+}
+#hero p.hero-subtitle { /* Hero subtitle is special, light on dark gradient */
+    color: rgba(255, 255, 255, 0.9);
+}
+
 
 a {
     color: var(--phd-accent-primary);
@@ -145,144 +157,345 @@ a:hover, a:focus {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* SECTION STYLING (HOMEPAGE, MERCH INTRO, ABOUT/CONTACT SECTIONS) */
-#hero {
-    background-color: var(--phd-highlight-bg);
-    padding: 80px 20px;
-    text-align: center;
-    border-bottom: 1px solid var(--phd-border-color);
-    margin-bottom: 40px;
-    border-radius: 0; /* Full width band, no radius */
-}
-#hero h2 {
-    font-size: 3em;
-    color: var(--phd-text-primary);
-    margin-bottom: 0.7em;
-}
-#hero p {
-    font-size: 1.15em;
-    color: var(--phd-text-secondary);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0;
-}
-.hero-highlight {
+.btn-secondary-custom { 
+    background-color: transparent;
     color: var(--phd-accent-primary);
+    border: 2px solid var(--phd-accent-primary);
+    padding: 10px 25px; 
 }
-
-#featured-memes {
-    background-color: var(--phd-bg-content);
-    padding: 60px 20px;
-    margin-bottom: 40px;
-    text-align: center;
-    border-radius: 8px; /* Rounded corners for this content block */
-    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.07);
-}
-#featured-memes h3 {
-    font-size: 2.2em;
-    color: var(--phd-text-primary);
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.meme-gallery {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.meme-item {
-    background-color: var(--phd-bg-content);
-    border: 1px solid var(--phd-border-color);
-    border-radius: 6px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(44, 58, 71, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    width: calc((100% - 2 * 20px) / 3); /* 3 columns with 20px gap */
-    box-sizing: border-box;
-}
-.meme-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(44, 58, 71, 0.12);
+.btn-secondary-custom:hover, .btn-secondary-custom:focus {
+    background-color: var(--phd-accent-primary);
+    color: #ffffff;
     border-color: var(--phd-accent-primary);
 }
-.meme-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
-    border: 1px solid var(--phd-border-color);
-    min-height: 150px;
-    background-color: var(--phd-bg-primary);
-}
-.meme-item p {
-    font-family: var(--phd-font-body);
-    color: var(--phd-text-secondary);
-    font-size: 0.9em;
-    margin-top: 15px;
-    line-height: 1.5;
+
+
+/* HERO SECTION STYLES */
+#hero {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    background: linear-gradient(-45deg, var(--phd-accent-primary), var(--phd-accent-secondary), #6A82FB, var(--phd-bg-primary));
+    background-size: 300% 300%;
+    animation: heroGradient 20s ease infinite;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    border-bottom: none; 
+    border-radius: 0; 
+    margin-bottom: 0; 
 }
 
-#email-signup {
-    background-color: var(--phd-highlight-bg);
-    padding: 50px 20px;
-    border-top: 2px solid var(--phd-accent-primary);
-    border-bottom: 2px solid var(--phd-accent-primary);
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px; /* Added for spacing from footer */
-    border-radius: 0; /* Full-width band */
+@keyframes heroGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-#email-signup h3 {
-    font-size: 2em;
-    color: var(--phd-text-primary);
-    margin-bottom: 15px;
+
+.hero-content {
+   max-width: 900px;
 }
-#email-signup p {
-    font-size: 1.1em;
-    color: var(--phd-text-secondary);
-    max-width: 650px;
+
+#hero h2 {
+    font-family: var(--phd-font-heading);
+    font-size: 3.8em;
+    font-weight: 700;
+    color: var(--phd-bg-content);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35);
+    line-height: 1.2;
+    margin-top: 0; 
+    margin-bottom: 25px;
+}
+
+#hero h2 .h-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) rotateX(-30deg);
+    transform-origin: bottom;
+    animation: revealWord 0.6s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+
+@keyframes revealWord {
+    0% { opacity: 0; transform: translateY(40px) rotateX(-30deg); }
+    100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+
+.hero-highlight { 
+     color: #FFD1D1; 
+}
+
+#hero p.hero-subtitle { 
+    font-family: var(--phd-font-body);
+    font-size: 1.25em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;
     line-height: 1.7;
-}
-form#signup-form {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 20px;
-}
-#email-signup input[type="email"] {
-    background-color: var(--phd-bg-content);
-    border: 1px solid var(--phd-border-color);
-    border-radius: 6px;
-    padding: 12px 15px;
-    font-family: var(--phd-font-body);
-    font-size: 1em;
-    min-width: 280px;
-    flex-grow: 1;
-    box-sizing: border-box;
-    color: var(--phd-text-primary);
-}
-#email-signup input[type="email"]::placeholder {
-    color: var(--phd-text-secondary);
-    opacity: 0.8;
-}
-#email-signup .btn {
-   flex-shrink: 0;
+    opacity: 0;
+    animation: fadeInHeroP 1s ease forwards 1s; 
 }
 
+@keyframes fadeInHeroP { 
+    to { opacity: 1; }
+}
+
+.hero-svg-placeholder {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    margin: 20px auto 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: pulsePlaceholder, rotatePlaceholder, fadeInHeroP; 
+    animation-duration: 2.5s, 20s, 1s;
+    animation-iteration-count: infinite, infinite, 1; 
+    animation-timing-function: ease-in-out, linear, ease;
+    animation-delay: 0s, 0s, 1.5s; 
+    animation-fill-mode: forwards; 
+    opacity:0; 
+    padding: 5px; 
+    box-sizing: border-box; 
+}
+.hero-svg-placeholder::before { 
+    content: 'Brain Spark!'; 
+    font-family: var(--phd-font-handwritten); 
+    font-size: 1em; 
+    font-weight: 700;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 5px;
+}
+@keyframes pulsePlaceholder {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+    50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+}
+@keyframes rotatePlaceholder {
+   from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+}
+
+.btn-hero-cta { 
+    padding: 16px 35px;
+    font-size: 1.1em;
+    background-color: var(--phd-bg-content);
+    color: var(--phd-accent-primary);
+    opacity:0;
+    animation: fadeInHeroP 1s ease forwards 1.8s; 
+}
+.btn-hero-cta:hover, .btn-hero-cta:focus {
+    background-color: var(--phd-highlight-bg);
+    color: var(--phd-text-primary);
+}
+
+/* FEATURED MEMES - POLAROID STYLE */
+#featured-memes {
+    background-color: var(--phd-bg-primary); 
+    padding: 60px 0; 
+    margin-bottom: 40px; 
+    text-align: center; 
+    border-radius: 0; 
+    box-shadow: none; 
+}
+#featured-memes h3 {
+    font-family: var(--phd-font-heading);
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--phd-text-primary);
+}
+
+.polaroid-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 20px 0 30px 0;
+    scrollbar-width: thin; 
+    scrollbar-color: var(--phd-accent-primary) var(--phd-bg-primary); 
+}
+.polaroid-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+.polaroid-scroll-container::-webkit-scrollbar-track {
+    background: var(--phd-bg-primary);
+    border-radius: 4px;
+}
+.polaroid-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--phd-accent-primary);
+    border-radius: 4px;
+}
+.polaroid-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: var(--phd-accent-secondary);
+}
+
+.meme-gallery.polaroid-style {
+    display: inline-flex; 
+    gap: 35px;
+    padding: 10px 30px; 
+}
+
+.meme-item { 
+    background-color: var(--phd-bg-content); 
+    border: 1px solid #ddd; 
+    padding: 15px 15px 20px 15px; 
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.1); 
+    border-radius: 4px;
+    width: 260px; 
+    display: inline-block; 
+    vertical-align: top;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.meme-item:hover {
+    transform: rotate(0deg) scale(1.08) !important; 
+    z-index: 10;
+    box-shadow: 6px 6px 20px rgba(0,0,0,0.18);
+}
+.meme-item img {
+    width: 100%; 
+    display: block;
+    border: 1px solid #eee; 
+    margin-bottom: 15px;
+    min-height: 180px; 
+    background-color: var(--phd-bg-primary); 
+    border-radius: 0; 
+}
+.meme-item p { 
+    font-family: var(--phd-font-handwritten); 
+    font-size: 1.3em; 
+    font-weight: 700; 
+    color: var(--phd-text-primary);
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 0; 
+    margin-bottom: 0; 
+}
+
+/* EMAIL SIGNUP - NOTECARD STYLE */
+#email-signup {
+    background-color: transparent; 
+    padding: 80px 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: none; 
+    border-bottom: none; 
+    border-radius: 0; 
+    margin-top: 40px; 
+    margin-bottom: 40px; 
+}
+
+.notecard {
+    background-color: var(--phd-highlight-bg); 
+    border: 1px solid #EADCB1; 
+    padding: 35px 40px 40px 40px; 
+    box-shadow: 6px 6px 25px rgba(0,0,0,0.15); 
+    border-radius: 5px; 
+    max-width: 500px; 
+    width: 100%; 
+    text-align: center;
+    position: relative; 
+    transform: rotate(-1.8deg); 
+    transition: transform 0.3s ease;
+}
+.notecard:hover {
+   transform: rotate(0deg) scale(1.02); 
+}
+
+.notecard h3 {
+    font-family: var(--phd-font-handwritten); 
+    font-size: 2.8em; 
+    font-weight: 700;
+    color: var(--phd-text-primary);
+    margin-top: 0; 
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.notecard p {
+    font-family: var(--phd-font-body); 
+    font-size: 1.05em;
+    color: var(--phd-text-secondary);
+    margin-bottom: 30px;
+    line-height: 1.65;
+}
+
+.notecard form#signup-form {
+    display: flex;
+    flex-direction: column; 
+    gap: 18px; 
+    margin-top: 0; 
+}
+
+.notecard input[type="email"] {
+    background-color: var(--phd-bg-content); 
+    border: 1px solid var(--phd-border-color);
+    border-radius: 5px; 
+    padding: 14px 18px; 
+    font-family: var(--phd-font-body);
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    text-align:center; 
+    min-width: auto; 
+    margin-right: 0; 
+}
+.notecard input[type="email"]::placeholder {
+   color: var(--phd-text-secondary);
+   opacity: 0.8;
+}
+
+.btn-notecard { 
+    padding: 14px 25px; 
+    font-size: 1.05em; 
+    width: auto; 
+    align-self: center; 
+}
+
+.paperclip {
+    position: absolute;
+    top: -20px; 
+    left: 25px; 
+    width: 30px; 
+    height: 85px; 
+    border: 4px solid #B0B0B0; 
+    border-radius: 15px 15px 15px 15px / 10px 10px 10px 10px; 
+    transform: rotate(-30deg);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    box-sizing: border-box;
+    z-index: 1; 
+}
+.paperclip::before {
+    content: '';
+    position: absolute;
+    top: 12px; 
+    left: -19px; 
+    width: 22px; 
+    height: 50px; 
+    border: 4px solid #B0B0B0;
+    border-radius: 12px 12px 12px 12px / 8px 8px 8px 8px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-sizing: border-box;
+}
+
+
 /* MERCH PAGE INTRO & PRODUCT STYLING */
-main.container > h2.page-title { /* Specific class for main page titles if needed */
+main.container > h2 { /* Page Title for Merch, About, Contact */
     text-align: center;
     margin-bottom: 15px;
     font-size: 2.5em;
     color: var(--phd-text-primary);
 }
-main.container > p.page-intro { /* Specific class for intro paragraphs */
+main.container > p:first-of-type { /* Intro paragraph for Merch page */
     text-align: center;
     color: var(--phd-text-secondary);
     max-width: 700px;
@@ -307,7 +520,7 @@ main.container > p.page-intro { /* Specific class for intro paragraphs */
     padding: 25px;
     box-shadow: 0 5px 15px rgba(44, 58, 71, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    width: calc((100% - 2 * 20px) / 3); /* 3 columns with 20px gap */
+    width: calc((100% - 2 * 20px) / 3);
     box-sizing: border-box;
     text-align: center;
 }
@@ -316,13 +529,20 @@ main.container > p.page-intro { /* Specific class for intro paragraphs */
     box-shadow: 0 8px 20px rgba(44, 58, 71, 0.12);
     border-color: var(--phd-accent-primary);
 }
+.merch-item:hover img {
+    transform: scale(1.04); 
+}
+.merch-item:hover .btn {
+    transform: translateY(-3px) scale(1.03); 
+}
 .merch-item img {
     max-width: 100%;
     height: auto;
     border-radius: 6px;
     margin-bottom: 20px;
-    background-color: #eee; /* Placeholder bg */
+    background-color: #eee;
     min-height: 200px;
+    transition: transform 0.3s ease; 
 }
 .merch-item h3 {
     font-family: var(--phd-font-heading);
@@ -341,7 +561,7 @@ main.container > p.page-intro { /* Specific class for intro paragraphs */
 
 /* ABOUT & CONTACT PAGE STYLING */
 .about-content,
-.contact-content {
+.contact-content { /* These are classes on the <section> elements themselves */
     background-color: var(--phd-bg-content);
     padding: 30px;
     border-radius: 8px;
@@ -353,19 +573,15 @@ main.container > p.page-intro { /* Specific class for intro paragraphs */
     margin-bottom: 0;
 }
 
-/* Titles for About/Contact pages (if using general h2) */
-main.container > h2 { /* Applies to Merch title too if not more specific */
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--phd-text-primary);
-}
-
-.about-content h3,
+/* Section Subheadings (h3 within the .about-content and .contact-content sections) */
+.about-content h3, 
 .contact-content h3 {
-    font-size: 1.8em;
+    font-family: var(--phd-font-handwritten); 
+    font-size: 2.4em; 
+    line-height: 1.3;
     color: var(--phd-accent-primary);
-    margin-bottom: 20px;
+    margin-bottom: 25px; 
+    text-align: center;
 }
 
 #what-we-do ul {
@@ -397,8 +613,48 @@ main.container > h2 { /* Applies to Merch title too if not more specific */
     text-align: center;
     margin-top: 5px;
 }
-#contact-info p a { /* Email link on contact page */
-   font-size: 1.1em;
+#contact-info p a[href^="mailto:"] { /* Enhanced email link */
+    font-size: 1.25em; 
+    font-weight: 700; 
+    padding: 10px 18px; 
+    background-color: var(--phd-highlight-bg);
+    border-radius: 5px; 
+    border: 1px solid var(--phd-border-color);
+    text-decoration: none; 
+    color: var(--phd-accent-primary); 
+    display: inline-block; 
+    margin-top: 8px; 
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+#contact-info p a[href^="mailto:"]:hover,
+#contact-info p a[href^="mailto:"]:focus {
+    background-color: var(--phd-accent-primary);
+    color: var(--phd-bg-content); 
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+.illustration-placeholder-journey {
+    width: 100%;
+    min-height: 280px; 
+    background-color: var(--phd-bg-primary);
+    border: 3px dashed var(--phd-accent-primary);
+    border-radius: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 50px auto; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+.illustration-placeholder-journey p {
+    font-family: var(--phd-font-handwritten); 
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: var(--phd-accent-primary);
+    max-width: 80%; 
 }
 
 /* FOOTER STYLES */
@@ -409,10 +665,35 @@ footer {
     text-align: center;
     margin-top: 40px;
 }
-footer p {
-    color: var(--phd-bg-primary);
-    margin: 0;
-    font-size: 0.95em;
+.footer-badge-placeholder {
+    width: 130px; 
+    height: 130px;
+    border: 4px double var(--phd-bg-primary); 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto 30px auto; 
+    background-color: var(--phd-accent-primary); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.footer-badge-placeholder:hover {
+   transform: scale(1.05) rotate(-5deg); 
+   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.footer-badge-placeholder span {
+    font-family: var(--phd-font-heading); 
+    color: var(--phd-bg-content); 
+    font-size: 1em; 
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 10px; 
+}
+footer .container > p { 
+   margin-top: 0; 
+   color: var(--phd-bg-primary);
+   font-size: 0.95em;
 }
 footer a {
     color: var(--phd-accent-primary);
@@ -454,10 +735,49 @@ html {
     background: var(--phd-text-primary);
 }
 
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.body-fade-out {
+    opacity: 0 !important; 
+    transform: translateY(15px);
+    transition: opacity 0.35s ease-in, transform 0.35s ease-in; 
+}
+
+.squiggle-divider {
+    width: 120px; 
+    height: 25px; 
+    margin: 50px auto; 
+    position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 25'%3E%3Cpath d='M0,15 Q30,0 60,15 T120,15' fill='none' stroke='%23FF6B6B' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* General Focus States for Accessibility */
+a:focus-visible,
+.btn:focus-visible,
+input[type="email"]:focus-visible,
+.polaroid-style .meme-item:focus-visible, /* If items can receive focus */
+select:focus-visible, /* If any select elements were added */
+textarea:focus-visible { /* If any textareas were added */
+    outline: 3px solid var(--phd-accent-secondary); /* Prominent color from palette */
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--phd-bg-content); /* Helps outline stand out */
+}
+nav ul li a:focus-visible {
+   outline: 2px solid var(--phd-accent-secondary);
+   outline-offset: 4px; 
+}
+
+
 /* RESPONSIVE DESIGN ADJUSTMENTS */
 @media (max-width: 992px) {
-    .meme-item, .merch-item {
-        width: calc((100% - 20px) / 2); /* 2 columns with 20px gap */
+    .meme-item, .merch-item { 
+        width: calc((100% - 20px) / 2);
     }
 }
 
@@ -483,37 +803,45 @@ html {
     }
 
     h1 { font-size: 2.4em; }
-    h2 { font-size: 2em; } /* Default h2 at this breakpoint */
-    h3 { font-size: 1.6em; } /* Default h3 at this breakpoint */
+    h2 { font-size: 2em; } 
+    h3 { font-size: 1.6em; } 
     
-    #hero h2 { font-size: 2.5em; } /* Specific hero h2 adjustment */
-    main.container > h2 { font-size: 2.2em; } /* Page titles like on Merch/About/Contact */
-    .about-content h3, .contact-content h3, #email-signup h3, #featured-memes h3 { font-size: 1.7em; } /* Section titles */
+    #hero h2 { font-size: 2.8em; } 
+    #hero p.hero-subtitle { font-size: 1.1em; }
+    .btn-hero-cta { padding: 14px 30px; font-size: 1em; }
+
+    main.container > h2 { font-size: 2.2em; }
+    .about-content h3, .contact-content h3, #email-signup .notecard h3, #featured-memes h3 { font-size: 1.7em; }
 
 
-    .meme-gallery,
-    #merch-items {
+    .meme-gallery.polaroid-style { 
         flex-direction: column;
         align-items: center;
+        white-space: normal; 
     }
-
-    .meme-item,
-    .merch-item {
-        width: 85%; /* Stacked items take more width */
-        margin-bottom: 25px; /* Use margin as gap doesn't apply to column flex */
+    .polaroid-scroll-container { 
+        overflow-x: hidden;
+    }
+    .meme-item, 
+    .merch-item { 
+        width: 85%; 
+        margin-bottom: 25px; 
     }
      .meme-item:last-child, .merch-item:last-child {
         margin-bottom: 0;
     }
 
-    #email-signup input[type="email"] {
-        width: calc(100% - 30px); /* Full width minus padding */
-        min-width: auto; /* Reset min-width */
-        margin-right: 0;
-        margin-bottom:15px;
+    #email-signup { 
+        padding: 50px 20px; 
     }
-    #email-signup .btn { /* Ensure button stacks nicely */
-        width: auto; /* Or 100% for full width button */
+    .notecard input[type="email"] { 
+        width: 100%; 
+        min-width: auto;
+        margin-right: 0;
+        /* margin-bottom:15px; /* Gap handles this in flex column */
+    }
+    .notecard .btn { 
+        width: auto; 
     }
 }
 
@@ -531,26 +859,54 @@ html {
     }
     
     h1 { font-size: 2em; }
-    h2 { font-size: 1.7em; } /* Default h2 */
-    h3 { font-size: 1.4em; } /* Default h3 */
+    h2 { font-size: 1.7em; } 
+    h3 { font-size: 1.4em; } 
 
-    #hero h2 { font-size: 2em; } /* Specific hero h2 adjustment */
-    main.container > h2 { font-size: 1.8em; } /* Page titles */
-    .about-content h3, .contact-content h3, #email-signup h3, #featured-memes h3 { font-size: 1.5em; } /* Section titles */
+    #hero { min-height: 85vh; padding: 20px 15px; }
+    #hero h2 { font-size: 2.2em; line-height: 1.3; }
+    #hero p.hero-subtitle { font-size: 1em; }
+    .hero-svg-placeholder { width: 60px; height: 60px; margin:15px auto 25px auto;}
+    .hero-svg-placeholder::before {font-size:1.5em;}
+
+    main.container > h2 { font-size: 1.8em; }
+    .about-content h3, .contact-content h3, #email-signup .notecard h3, #featured-memes h3 { font-size: 1.5em; }
 
 
-    .meme-item,
-    .merch-item {
+    .meme-item, 
+    .merch-item { 
         width: 95%;
     }
-    .container > main section, #featured-memes { /* Reduce padding for content sections on smallest screens */
+    .container > main section, #featured-memes {
         padding: 20px;
     }
-    #hero { padding: 60px 15px; }
-    #email-signup { padding: 40px 15px; }
+    
+    #email-signup { 
+        padding: 50px 20px;
+    }
+    .notecard {
+        transform: rotate(0deg); 
+        padding: 25px 20px 30px 20px;
+        max-width: calc(100% - 20px); 
+    }
+    .notecard:hover {
+       transform: scale(1.01); 
+    }
+    .notecard h3 { font-size: 2.2em; } 
+    .notecard p { font-size: 1em; } 
+    .paperclip { 
+       top: -15px; left: 10px; transform: rotate(-30deg) scale(0.8);
+    }
 
-    #email-signup input[type="email"] {
-        width: 100%; /* Full width */
+    #email-signup input[type="email"] { 
+        width: 100%;
         box-sizing: border-box;
+    }
+
+    /* Polaroid adjustments for very small screens */
+    .polaroid-style .meme-item {
+        transform: rotate(0deg) !important; /* Disable initial random tilt */
+    }
+    .polaroid-style .meme-item:hover {
+       transform: scale(1.05) !important; /* Keep hover scale but no rotation */
     }
 }
